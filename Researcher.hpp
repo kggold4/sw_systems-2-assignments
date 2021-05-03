@@ -10,5 +10,6 @@ namespace pandemic {
     class Researcher : public Player {
         public:
             Researcher(Board& board, const int city);
+            Researcher& build();
     };
 }

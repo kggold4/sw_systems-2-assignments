@@ -10,5 +10,6 @@ namespace pandemic {
     class GeneSplicer : public Player {
         public:
             GeneSplicer(Board& board, const int city);
+            GeneSplicer& build();
     };
 }

@@ -15,15 +15,16 @@ namespace pandemic {
             char number_of_research_station;
         public:
             Player(Board& board, const int city);
-            virtual Player
-            void drive(const int city);
-            void fly_direct(const int city);
-            void fly_charter(const int city);
-            void fly_shuttle(const int city);
-            void bulid();
-            void discover_curve();
-            void treat(const int city);
-            void role();
-            void take_card(const int city);
+            ~Player();
+            virtual Player& drive(const int city);
+            virtual Player& fly_direct(const int city);
+            virtual Player& fly_charter(const int city);
+            virtual Player& fly_shuttle(const int city);
+            virtual Player& bulid();
+            virtual Player& discover_cure(const int color);
+            virtual Player& treat(const int city);
+            virtual Player& take_card(const int city);
+            virtual Player& remove_cards();
+            string role();
     };
 }
