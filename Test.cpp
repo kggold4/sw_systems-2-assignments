@@ -17,5 +17,5 @@ using namespace std;
 using namespace pandemic;
 
 TEST_CASE("base case") {
-    CHECK();
+    CHECK(3 + 6 == 9);
 }
