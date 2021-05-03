@@ -6,10 +6,9 @@ namespace pandemic {
         private:
             pandemic::Color color;
         public:
+            Board();
             boolean is_clean();
             void remove_cures();
 
     };
 }
-
-
