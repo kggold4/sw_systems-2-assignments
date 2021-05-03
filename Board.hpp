@@ -1,5 +1,8 @@
 #pragma once
+#include <iostream>
 #include "Color.hpp"
+
+using namespace std;
 
 namespace pandemic {
     class Board {
@@ -7,8 +10,9 @@ namespace pandemic {
             pandemic::Color color;
         public:
             Board();
-            boolean is_clean();
+            bool is_clean();
             void remove_cures();
-
+            int& operator[](int city);
+            friend Board operator<<(ostream& ost, const Board& board);
     };
 }

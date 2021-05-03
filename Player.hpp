@@ -1,7 +1,10 @@
 #pragma once
 
+#include "Board.hpp"
 #include "Color.hpp"
 #include "City.hpp"
+
+using namespace pandemic;
 
 namespace pandemic {
     class Player {
@@ -10,7 +13,7 @@ namespace pandemic {
             unsigned int number_of_cards;
             char number_of_research_station;
         public:
-            Player();
+            Player(const Board& board, const City& city);
             void drive(City city);
             void fly_direct(City city);
             void fly_charter(City city);
