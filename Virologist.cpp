@@ -17,6 +17,6 @@ using namespace pandemic;
 
 namespace pandemic {
     Virologist::Virologist(Board& board, const int city) : Player(board, city) {
-        
+
     }
 }
