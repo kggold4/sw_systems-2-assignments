@@ -7,7 +7,10 @@ using namespace pandemic;
 
 namespace pandemic {
         Player::Player(Board& board, const int city) {
+            this->board = board;
             this->current_city = city;
+            this->number_of_cards = 0;
+            this->number_of_research_station = 0;
         }
         Player::~Player() {}
         Player& Player::drive(const int city) {
@@ -37,7 +40,7 @@ namespace pandemic {
         Player& Player::remove_cards() {
             return *this;
         }
-        string Player::role() {
-            return "";
+        string Player::role() const {
+            return typeid(this).name();
         }
 }

@@ -25,6 +25,6 @@ namespace pandemic {
             virtual Player& treat(const int city);
             virtual Player& take_card(const int city);
             virtual Player& remove_cards();
-            string role();
+            string role() const;
     };
 }

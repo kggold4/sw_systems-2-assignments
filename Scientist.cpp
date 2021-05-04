@@ -6,11 +6,10 @@
 
 using namespace pandemic;
 
+static const int DEFAULT_N = 5;
+
 namespace pandemic {
-    Scientist::Scientist(Board& board, const int city) : Player(board, city) {
-        this->n = 5;
-    }
-    Scientist::Scientist(Board& board, const int city, const int n) : Player(board, city) {
+    Scientist::Scientist(Board& board, const int city, const int n = DEFAULT_N) : Player(board, city) {
         this->n = n;
     }
 }

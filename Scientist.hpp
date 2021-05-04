@@ -11,7 +11,6 @@ namespace pandemic {
         private:
             int n;
         public:
-            Scientist(Board& board, const int city);
             Scientist(Board& board, const int city, int n);
             Scientist& build();
     };
