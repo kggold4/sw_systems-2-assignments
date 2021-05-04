@@ -9,8 +9,8 @@ using namespace pandemic;
 namespace pandemic {
     class Player {
         private:
-            City current_city;
             Board board;
+            int current_city;
             unsigned int number_of_cards;
             char number_of_research_station;
         public:

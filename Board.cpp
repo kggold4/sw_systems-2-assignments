@@ -4,6 +4,9 @@
 using namespace pandemic;
 
 namespace pandemic {
+    Board::Board() {}
+    Board::~Board() {}
+
     bool Board::is_clean() {
         return false;
     }

@@ -14,6 +14,7 @@ namespace pandemic {
             map<int,int> T;
         public:
             Board();
+            ~Board();
             bool is_clean();
             void remove_cures();
             void remove_stations();
