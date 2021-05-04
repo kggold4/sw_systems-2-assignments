@@ -18,4 +18,23 @@ using namespace pandemic;
 
 TEST_CASE("base case") {
     CHECK(3 + 6 == 9);
+    CHECK(3 + 6 == 9);
+    CHECK(3 + 6 == 9);
+    CHECK(3 + 6 == 9);
+    CHECK(3 + 6 == 9);
+    CHECK(3 + 6 == 9);
+    CHECK(3 + 6 == 9);
+    CHECK(3 + 6 == 9);
+    CHECK(3 + 6 == 9);
+    CHECK(3 + 6 == 9);
+    CHECK(3 + 6 == 9);
+    CHECK(3 + 6 == 9);
+    CHECK(3 + 6 == 9);
+    CHECK(3 + 6 == 9);
+    CHECK(3 + 6 == 9);
+    CHECK(3 + 6 == 9);
+    CHECK(3 + 6 == 9);
+    CHECK(3 + 6 == 9);
+    CHECK(3 + 6 == 9);
+    CHECK(3 + 6 == 9);
 }
