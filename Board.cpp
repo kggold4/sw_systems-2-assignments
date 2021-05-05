@@ -15,9 +15,13 @@ using namespace pandemic;
 
 static const unsigned int MAX_CITIES = 48;
 
+
 namespace pandemic {
     Board::Board() {
-        for(int i = 0; i < MAX_CITIES; i++) { T[i] = 0; }
+        for(int i = 0; i < MAX_CITIES; i++) { cities_cubes[i] = 0; }
+        for(int i = 0; i < MAX_CITIES; i++) {
+            cities_names[i] = CITIES_NAMES[i];
+        }
     }
 
     Board::~Board() {}
@@ -25,7 +29,7 @@ namespace pandemic {
     bool Board::is_clean() {
         bool ans = true;
         for(int i = 0; i < MAX_CITIES; i++) {
-            if(T[i] > 0) {
+            if(cities_cubes[i] > 0) {
                 ans = false;
                 break;
             }
@@ -42,11 +46,15 @@ namespace pandemic {
     }
 
     int& Board::operator[](int city) {
-        return T[city];
+        return cities_cubes[city];
     }
 
     ostream& operator<<(ostream& ost, const Board& board) {
-        ost << "BOARD";
+        for(auto &v : board.cities_cubes) {
+            ost << v.first+1 << " [" << CITIES_NAMES[v.first] << "]: " << v.second << endl;
+        }
+        
+        ost << "size of cities_names is: " << int(CITIES_NAMES->length()) << endl;
         return ost;
     }
 }

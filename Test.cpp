@@ -17,6 +17,10 @@ using namespace std;
 using namespace pandemic;
 
 TEST_CASE("base case") {
+    Board board;
+    board[City::Atlanta] = 2;
+    cout << board << endl;
+
     CHECK(3 + 6 == 9);
     CHECK(3 + 6 == 9);
     CHECK(3 + 6 == 9);

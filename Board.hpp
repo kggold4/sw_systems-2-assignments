@@ -21,7 +21,8 @@ namespace pandemic {
     class Board {
         private:
             //pandemic::Color color;
-            map<int,int> T;
+            map<int, int> cities_cubes;
+            map<int, string> cities_names;
         public:
 
             // constructor
@@ -34,7 +35,7 @@ namespace pandemic {
             void remove_cures();
             void remove_stations();
 
-            // get reference of city in T map
+            // get reference of city in cities_cubes map
             int& operator[](int city);
             friend ostream& operator<<(ostream& ost, const Board& board);
     };
