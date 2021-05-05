@@ -21,9 +21,6 @@ namespace pandemic {
     Board::Board() {
         for(int i = 0; i < MAX_CITIES; i++) {
             cities_cubes[i] = 0;
-            // cities_names.insert({i, 0});
-            // cities_names.insert(CITIES_NAMES[i]);
-            // cities_names.insert({i, CITIES_NAMES[i]});
             string name_city = CITIES_NAMES[i];
             cities_names[i] = name_city;
         }
