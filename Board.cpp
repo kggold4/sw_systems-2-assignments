@@ -7,10 +7,11 @@
  * YEAR: 2021
  * 
  * */
-
+#include <string>
 #include "Board.hpp"
 #include "City.hpp"
 
+using namespace std;
 using namespace pandemic;
 
 static const unsigned int MAX_CITIES = 48;
@@ -18,18 +19,22 @@ static const unsigned int MAX_CITIES = 48;
 
 namespace pandemic {
     Board::Board() {
-        for(int i = 0; i < MAX_CITIES; i++) { cities_cubes[i] = 0; }
         for(int i = 0; i < MAX_CITIES; i++) {
-            cities_names[i] = CITIES_NAMES[i];
+            cities_cubes[i] = 0;
+            // cities_names.insert({i, 0});
+            // cities_names.insert(CITIES_NAMES[i]);
+            // cities_names.insert({i, CITIES_NAMES[i]});
+            string name_city = CITIES_NAMES[i];
+            cities_names[i] = name_city;
         }
     }
 
     Board::~Board() {}
 
-    bool Board::is_clean() {
+    bool Board::is_clean() const {
         bool ans = true;
         for(int i = 0; i < MAX_CITIES; i++) {
-            if(cities_cubes[i] > 0) {
+            if(get_city_cubes(i) > 0) {
                 ans = false;
                 break;
             }

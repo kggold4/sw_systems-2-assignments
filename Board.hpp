@@ -11,8 +11,8 @@
 #pragma once
 
 #include <iostream>
-#include <map>
 #include <string>
+#include <map>
 
 #include "Color.hpp"
 
@@ -32,7 +32,7 @@ namespace pandemic {
             // deconstructor
             ~Board();
 
-            bool is_clean();
+            bool is_clean() const;
             void remove_cures();
             void remove_stations();
 

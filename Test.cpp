@@ -17,7 +17,7 @@
 using namespace std;
 using namespace pandemic;
 
-static const int MAX_CITIES = 48;
+static const int MAX_CITIES = 47;
 static const int MIN_CITIES = 0;
 static const int MAX_CUBES = 5;
 static const int MIN_CUBES = 1;
