@@ -13,7 +13,6 @@
 #include <iostream>
 #include <string>
 #include <map>
-
 #include "Color.hpp"
 
 using namespace std;
@@ -29,7 +28,7 @@ namespace pandemic {
             // constructor
             Board();
 
-            // deconstructor
+            // de-constructor
             ~Board();
 
             bool is_clean() const;

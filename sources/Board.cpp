@@ -19,7 +19,10 @@ using namespace pandemic;
 
 namespace pandemic {
 
+    // number of cities
     static const unsigned int MAX_CITIES = 48;
+
+    // connections between cities
     static const map<City, set<City>> city_map {
             {Algiers,{Madrid, Paris, Istanbul, Cairo}},
             {Atlanta,{Chicago, Miami, Washington}},
@@ -71,6 +74,9 @@ namespace pandemic {
             {Washington,{Atlanta, NewYork, Montreal, Miami}}
     };
 
+    static bool has_station[MAX_CITIES] = { false };
+
+    // board constructor
     Board::Board() {
         for(int i = 0; i < MAX_CITIES; i++) {
             cities_cubes[i] = 0;
