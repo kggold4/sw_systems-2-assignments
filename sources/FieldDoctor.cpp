@@ -19,4 +19,15 @@ namespace pandemic {
     FieldDoctor::FieldDoctor(Board& board, const int city) : Player(board, city) {
         
     }
+    Player& treat(const City city) {
+        if(this->board.get_city_cubes(city) == 0) {
+            throw exception("given city not have disease cubes");
+        }
+        if(has_cure(CITIES_COLORS[city])) {
+            remove_all_city_cubes();
+        } else {
+            decrease_city_cubes();
+        }
+        return *this;
+    }
 }
