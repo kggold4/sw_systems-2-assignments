@@ -20,6 +20,6 @@ namespace pandemic {
     class Dispatcher : public Player {
         public:
             Dispatcher(Board& board, const int city);
-            Player& build();
+            Player& fly_direct(const City city) override;
     };
 }

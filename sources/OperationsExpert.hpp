@@ -20,6 +20,6 @@ namespace pandemic {
     class OperationsExpert : public Player {
         public:
             OperationsExpert(Board& board, const int city);
-            OperationsExpert& build();
+            OperationsExpert& build() override;
     };
 }

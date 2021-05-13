@@ -19,4 +19,11 @@ namespace pandemic {
     Medic::Medic(Board& board, const int city) : Player(board, city) {
         
     }
+    Player& treat() override {
+        if(this->board.get_city_cubes(this->current_city) == 0) {
+            throw exception("current city not have disease cubes");
+        }
+        remove_all_city_cubes();
+        return *this;
+    }
 }

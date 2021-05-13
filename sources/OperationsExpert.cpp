@@ -20,6 +20,9 @@ namespace pandemic {
         
     }
     OperationsExpert& OperationsExpert::build() {
+        if(!valid_city(city)) { throw invalid_argument("invalid given city - do not exist"); }
+        if(!has_card(this->current_city)) { throw invalid_argument("player do not have given city card"); }
+        this->research_stations.find(this->current_city)->second = true;
         return *this;
     }
 }

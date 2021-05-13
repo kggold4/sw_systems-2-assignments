@@ -74,8 +74,6 @@ namespace pandemic {
             {Washington,{Atlanta, NewYork, Montreal, Miami}}
     };
 
-    static bool has_station[MAX_CITIES] = { false };
-
     // board constructor
     Board::Board() {
         for(int i = 0; i < MAX_CITIES; i++) {

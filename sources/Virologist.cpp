@@ -19,4 +19,15 @@ namespace pandemic {
     Virologist::Virologist(Board& board, const int city) : Player(board, city) {
 
     }
+    Player& treat(const City city) {
+        if(this->board.get_city_cubes(this->city) == 0) {
+            throw exception("current city not have disease cubes");
+        }
+        if(has_cure(CITIES_COLORS[this->city])) {
+            remove_all_city_cubes();
+        } else {
+            decrease_city_cubes();
+        }
+        return *this;
+    }
 }

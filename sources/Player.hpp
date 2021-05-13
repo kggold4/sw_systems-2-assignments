@@ -63,12 +63,24 @@ namespace pandemic {
             }
 
             // return true if color has curve
-            bool has_curve(Color color) {
+            bool has_cure(Color color) {
                 return this->curves.find(color)->second;
             }
 
             bool cards_is_empty() const {
                 return this->player_cards.empty();
+            }
+
+            void remove_all_city_cubes() {
+                int number_of_city_cubes = this->board.get_city_cubes(this->current_city);
+                while(number_of_city_cubes > 0) {
+                    decrease_city_cubes();
+                    number_of_city_cubes--;
+                }
+            }
+
+            void decrease_city_cubes() {
+                this->board.decrease_city_cubes(this->current_city);
             }
 
         public:
@@ -88,7 +100,7 @@ namespace pandemic {
             virtual Player& fly_shuttle(const City city);
             virtual Player& build();
             virtual Player& discover_cure(const Color color);
-            virtual Player& treat(const City city);
+            virtual Player& treat();
             virtual Player& take_card(const City city);
             virtual Player& remove_cards();
             string role() const;
