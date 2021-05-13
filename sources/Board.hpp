@@ -13,6 +13,7 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include "City.hpp"
 #include "Color.hpp"
 
 using namespace std;

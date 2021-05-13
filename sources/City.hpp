@@ -12,6 +12,8 @@
 
 #include "Color.hpp"
 
+using namespace std;
+
 namespace pandemic {
     enum City {
         Algiers,

@@ -16,10 +16,10 @@
 using namespace pandemic;
 
 namespace pandemic {
-    Researcher::Researcher(Board& board, const int city) : Player(board, city) {
+    Researcher::Researcher(Board& board, const City city) : Player(board, city) {
         
     }
-    Player& discover_cure(const Color color) override {
+    Player& discover_cure(const Color color) {
         if(!this->curves.find(color)->second) {
 
             // checking if there enough cards with given color

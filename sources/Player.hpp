@@ -18,6 +18,8 @@
 
 using namespace pandemic;
 
+const static unsigned int MAX_CITIES = 48;
+
 namespace pandemic {
     class Player {
         private:
@@ -84,7 +86,7 @@ namespace pandemic {
             virtual Player& fly_shuttle(const City city);
             virtual Player& build();
             virtual Player& discover_cure(const Color color);
-            virtual Player& treat();
+            virtual Player& treat(const City city);
             virtual Player& take_card(const City city);
             virtual Player& remove_cards();
             string role() const;

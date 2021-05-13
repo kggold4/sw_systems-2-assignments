@@ -112,7 +112,8 @@ namespace pandemic {
         }
         return *this;
     }
-    Player& Player::treat() {
+    Player& Player::treat(const City city) {
+        if(city != this->current_city) { throw invalid_argument("not in given city"); }
         if(this->board.get_city_cubes(this->current_city) == 0) {
             throw exception("current city not have disease cubes");
         }
