@@ -37,11 +37,40 @@ namespace pandemic {
             // curves discovered
             map<Color, bool> curves;
 
+            // return true if the player have the given city card
+            bool has_card(City city) {
+                if(cards_is_empty()) { throw invalid_argument("player do not have cards"); }
+                return this->player_cards.find(city) != this->player_cards.end();
+            }
+
+            // remove card from player cards
+            void remove_card(City city) {
+
+                // if card not found
+                if(!has_card(city)) { throw invalid_argument("player does not gave the given city card"); }
+                this->player_cards.erase(city);
+            }
+
             // check if city is valid
             bool valid_city(const City city) const {
                 if(city < 0 || city >= MAX_CITIES) { return false; }
                 return true;
             }
+
+            // return true of if the given city has a research station
+            bool has_research_station(City city) {
+                return this->research_stations.find(city)->second;
+            }
+
+            // return true if color has curve
+            bool has_curve(Color color) {
+                return this->curves.find(color)->second;
+            }
+
+            bool cards_is_empty() const {
+                return this->player_cards.empty();
+            }
+
         public:
 
             // constructor
