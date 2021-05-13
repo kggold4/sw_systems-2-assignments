@@ -17,7 +17,7 @@ using namespace pandemic;
 
 namespace pandemic {
 
-    Player::Player(Board& board, const int city) {
+    Player::Player(Board& board, const City city) {
         this->board = board;
         this->current_city = city;
         this->number_of_cards = 0;
@@ -25,7 +25,7 @@ namespace pandemic {
     }
     Player::~Player() {}
 
-    Player& Player::drive(const int city) {
+    Player& Player::drive(const City city) {
         Set<City> close_cities = city_map.at(this->current_city);
         for(auto &i : close_cities) {
             if(i == city) {
@@ -35,17 +35,20 @@ namespace pandemic {
         }
         throw invalid_argument("given city is not close to current city");
     }
-    Player& Player::fly_direct(const int city) {
+    Player& Player::fly_direct(const City city) {
+        if(this->number_of_cards == 0) { throw exception("not enugth carrds"); }
         if(!valid_city(city)) { throw invalid_argument("invalid given city - do not exist"); }
         this->current_city = city;
+        this->number_of_cards--;
         return *this;
     }
-    Player& Player::fly_charter(const int city) {
+    Player& Player::fly_charter(const City city) {
         if(!valid_city(city)) { throw invalid_argument("invalid given city - do not exist"); }
         this->current_city = city;
+        this->number_of_cards--;
         return *this;
     }
-    Player& Player::fly_shuttle(const int city) {
+    Player& Player::fly_shuttle(const City city) {
         if(!valid_city(city)) { throw invalid_argument("invalid given city - do not exist"); }
         if(!has_station[this->current_city]) {
             throw invalid_argument("current city has no stations");
@@ -62,16 +65,18 @@ namespace pandemic {
         has_station[this->current_city] = true;
         return *this;
     }
-    Player& Player::discover_cure(const int color) {
+    Player& Player::discover_cure(const City color) {
         return *this;
     }
-    Player& Player::treat(const int city) {
+    Player& Player::treat(const City city) {
         return *this;
     }
-    Player& Player::take_card(const int city) {
+    Player& Player::take_card(const City city) {
+        this->cards.insert(City(city));
         return *this;
     }
-    Player& Player::remove_cards() {
+    Player& Player::remove_cards(const City city) {
+
         return *this;
     }
     string Player::role() const {
