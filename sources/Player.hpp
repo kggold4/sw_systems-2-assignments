@@ -31,12 +31,6 @@ namespace pandemic {
             // player set of cards
             set<City> player_cards;
 
-            // each city can have a research station
-            map<City, bool> research_stations;
-
-            // curves discovered
-            map<Color, bool> curves;
-
             // return true if the player have the given city card
             bool has_card(City city) {
                 if(cards_is_empty()) { throw invalid_argument("player do not have cards"); }
@@ -55,16 +49,6 @@ namespace pandemic {
             bool valid_city(const City city) const {
                 if(city < 0 || city >= MAX_CITIES) { return false; }
                 return true;
-            }
-
-            // return true of if the given city has a research station
-            bool has_research_station(City city) {
-                return this->research_stations.find(city)->second;
-            }
-
-            // return true if color has curve
-            bool has_cure(Color color) {
-                return this->curves.find(color)->second;
             }
 
             bool cards_is_empty() const {

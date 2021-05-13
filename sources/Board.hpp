@@ -20,9 +20,17 @@ using namespace std;
 namespace pandemic {
     class Board {
         private:
-            // pandemic::Color color;
+            // disease cube in each city
             map<int, int> cities_cubes;
+
+            // each city has name
             map<int, string> cities_names;
+
+            // each city can have a research station
+            map<City, bool> research_stations;
+
+            // curves discovered
+            map<Color, bool> curves;
         public:
 
             // constructor
@@ -41,6 +49,8 @@ namespace pandemic {
             // output ostream
             friend ostream& operator<<(ostream& ost, const Board& board);
 
+            // cities methods on boards:
+
             // return a name of a city (0 <= i < 48)
             string get_city_name(const City city) const { return this->cities_names.at(city); }
 
@@ -49,5 +59,11 @@ namespace pandemic {
 
             void increase_city_cubes(const City city) { this->cities_cubes.at(city)++; }
             void decrease_city_cubes(const City city) { this->cities_cubes.at(city)--; }
+
+            // return true of if the given city has a research station
+            bool has_research_station(const City city) { return this->research_stations.find(city)->second; }
+
+            // return true if color has curve
+            bool has_cure(const Color color) { return this->curves.find(color)->second; }
     };
 }

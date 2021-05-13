@@ -24,13 +24,6 @@ namespace pandemic {
     Player::Player(Board& board, const City city) {
         this->board = board;
         this->current_city = city;
-        int i;
-        for(i = 0; i < MAX_CITIES; i++) {
-            this->research_stations.insert(pair<City(i), false>);
-        }
-        for(i = 0; i < MAX_COLORS; i++) {
-            this->curves.insert(pair<Color(i), false>);
-        }
     }
     Player::~Player() {}
 

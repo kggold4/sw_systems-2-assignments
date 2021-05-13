@@ -21,6 +21,7 @@ namespace pandemic {
 
     // number of cities
     static const unsigned int MAX_CITIES = 48;
+    static const unsigned int MAX_COLORS = 4;
 
     // connections between cities
     static const map<City, set<City>> city_map {
@@ -76,11 +77,17 @@ namespace pandemic {
 
     // board constructor
     Board::Board() {
+        int i;
         for(int i = 0; i < MAX_CITIES; i++) {
-            cities_cubes[i] = 0;
+            this->cities_cubes[i] = 0;
             string name_city = CITIES_NAMES[i];
-            cities_names[i] = name_city;
+            this->cities_names[i] = name_city;
+            this->research_stations.insert(pair<City(i), false>);
         }
+        for(i = 0; i < MAX_COLORS; i++) {
+            this->curves.insert(pair<Color(i), false>);
+        }
+
     }
 
     Board::~Board() {}
