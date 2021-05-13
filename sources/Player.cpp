@@ -20,8 +20,10 @@ namespace pandemic {
     Player::Player(Board& board, const City city) {
         this->board = board;
         this->current_city = city;
-        this->number_of_cards = 0;
-        this->number_of_research_station = 0;
+
+        // initialize maps
+        for(auto &i : this->research_stations) { i.second = false; }
+        for(auto &i : this->curves) { i.second = false; }
     }
     Player::~Player() {}
 
@@ -36,7 +38,7 @@ namespace pandemic {
         throw invalid_argument("given city is not close to current city");
     }
     Player& Player::fly_direct(const City city) {
-        if(this->number_of_cards == 0) { throw exception("not enugth carrds"); }
+        if(this->number_of_cards == 0) { throw exception("not enough cards"); }
         if(!valid_city(city)) { throw invalid_argument("invalid given city - do not exist"); }
         this->current_city = city;
         this->number_of_cards--;
@@ -75,8 +77,8 @@ namespace pandemic {
         this->cards.insert(City(city));
         return *this;
     }
-    Player& Player::remove_cards(const City city) {
-
+    Player& Player::remove_cards() {
+        this->player_cards.clear();
         return *this;
     }
     string Player::role() const {

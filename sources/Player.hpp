@@ -11,6 +11,7 @@
 #pragma once
 
 #include <set>
+#include <map>
 #include "Board.hpp"
 #include "Color.hpp"
 #include "City.hpp"
@@ -20,16 +21,33 @@ using namespace pandemic;
 namespace pandemic {
     class Player {
         private:
+
+            // player board
             Board board;
-            int current_city;
-            unsigned int number_of_cards;
-            set<City> cards;
+
+            // player current city
+            City current_city;
+
+            // player set of cards
+            set<City> player_cards;
+
+            // each city can have a research station
+            map<City, bool> research_stations;
+
+            // curves discovered
+            map<Color, bool> curves;
+
+            // check if city is valid
             bool valid_city(const City city) const {
                 if(city < 0 || city >= MAX_CITIES) { return false; }
                 return true;
             }
         public:
+
+            // constructor
             Player(Board& board, const City city);
+
+            // de-constructor
             ~Player();
 
             // drive to given near city (if not near throw exception)
@@ -40,10 +58,10 @@ namespace pandemic {
             virtual Player& fly_charter(const City city);
             virtual Player& fly_shuttle(const City city);
             virtual Player& build();
-            virtual Player& discover_cure(const City color);
+            virtual Player& discover_cure(const Color color);
             virtual Player& treat(const City city);
             virtual Player& take_card(const City city);
-            virtual Player& remove_cards(const City city);
+            virtual Player& remove_cards();
             string role() const;
     };
 }
