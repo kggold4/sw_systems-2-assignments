@@ -19,7 +19,7 @@ namespace pandemic {
     FieldDoctor::FieldDoctor(Board& board, const int city) : Player(board, city) {
         
     }
-    Player& treat(const City city) {
+    Player& FieldDoctor::treat(const City city) override {
         if(this->board.get_city_cubes(city) == 0) {
             throw exception("given city not have disease cubes");
         }
