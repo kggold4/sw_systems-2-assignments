@@ -19,7 +19,7 @@ namespace pandemic {
     Researcher::Researcher(Board& board, const City city) : Player(board, city) {
         
     }
-    Player& Researcher::discover_cure(const Color color) override {
+    Player& Researcher::discover_cure(const Color color) {
         if(!this->curves.find(color)->second) {
 
             // checking if there enough cards with given color
