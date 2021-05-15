@@ -20,7 +20,7 @@ namespace pandemic {
     Dispatcher::Dispatcher(Board& board, const int city) : Player(board, city) {
         
     }
-    Player& Dispatcher::fly_direct(const City city) {
+    Dispatcher& Dispatcher::fly_direct(const City city) {
         if(!valid_city(city)) { throw invalid_argument("invalid given city - do not exist"); }
         if(!has_card(city)) { throw invalid_argument("player do not have given city card"); }
         this->current_city = city;

@@ -30,8 +30,8 @@ namespace pandemic {
             // each city can have a research station
             map<City, bool> research_stations;
 
-            // curves discovered
-            map<Color, bool> curves;
+            // cures discovered
+            map<Color, bool> cures;
         public:
 
             // constructor
@@ -65,6 +65,8 @@ namespace pandemic {
             bool has_research_station(const City city) { return this->research_stations.find(city)->second; }
 
             // return true if color has curve
-            bool has_cure(const Color color) { return this->curves.find(color)->second; }
+            bool has_cure(const Color color) { return this->cures.find(color)->second; }
+            void set_cure(const Color color) { this->cures.find(color) = true; }
+            void del_cure(const Color color) { this->cures.find(color) = false; }
     };
 }

@@ -20,6 +20,6 @@ namespace pandemic {
     class GeneSplicer : public Player {
         public:
             GeneSplicer(Board& board, const int city);
-            Player& discover_cure(const Color color) override;
+            GeneSplicer& discover_cure(const Color color) override;
     };
 }

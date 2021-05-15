@@ -19,7 +19,7 @@ namespace pandemic {
     Virologist::Virologist(Board& board, const int city) : Player(board, city) {
 
     }
-    Player& Virologist::treat(const City city) {
+    Virologist& Virologist::treat(const City city) {
         if(this->board.get_city_cubes(this->city) == 0) {
             throw exception("current city not have disease cubes");
         }

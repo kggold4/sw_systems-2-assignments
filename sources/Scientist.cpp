@@ -22,7 +22,7 @@ namespace pandemic {
     Scientist::Scientist(Board& board, const int city, const int n = DEFAULT_N) : Player(board, city) {
         this->n = n;
     }
-    Player& Scientist::discover_cure(const Color color) {
+    Scientist& Scientist::discover_cure(const Color color) {
         if(!has_research_station(this->current_city)) { throw exception("current city do not have research station"); }
         if(!this->curves.find(color)->second) {
 

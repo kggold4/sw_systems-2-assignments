@@ -22,7 +22,7 @@ namespace pandemic {
     GeneSplicer::GeneSplicer(Board& board, const int city) : Player(board, city) {
         
     }
-    Player& GeneSplicer::discover_cure(const Color color) {
+    GeneSplicer& GeneSplicer::discover_cure(const Color color) {
         if(!has_research_station(this->current_city)) { throw exception("current city do not have research station"); }
         if(!this->curves.find(color)->second) {
 

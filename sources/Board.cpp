@@ -85,7 +85,7 @@ namespace pandemic {
             this->research_stations.insert(pair<City(i), false>);
         }
         for(i = 0; i < MAX_COLORS; i++) {
-            this->curves.insert(pair<Color(i), false>);
+            this->cures.insert(pair<Color(i), false>);
         }
 
     }

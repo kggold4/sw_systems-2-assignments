@@ -78,7 +78,7 @@ namespace pandemic {
     }
     Player& Player::discover_cure(const Color color) {
         if(!has_research_station(this->current_city)) { throw exception("current city do not have research station"); }
-        if(!this->curves.find(color)->second) {
+        if(!board.has_cure(color)) {
 
             // checking if there enough cards with given color
             bool has_enough_cards = false;
@@ -108,7 +108,7 @@ namespace pandemic {
                     }
                 }
             }
-            this->curves.find(color)->second = true;
+            this->board.set_cure(color);
         }
         return *this;
     }
