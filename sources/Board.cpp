@@ -23,58 +23,6 @@ namespace pandemic {
     static const unsigned int MAX_CITIES = 48;
     static const unsigned int MAX_COLORS = 4;
 
-    // connections between cities
-    static const map<City, set<City>> city_map {
-            {Algiers,{Madrid, Paris, Istanbul, Cairo}},
-            {Atlanta,{Chicago, Miami, Washington}},
-            {Baghdad,{Tehran, Istanbul, Cairo, Riyadh, Karachi}},
-            {Bangkok,{Kolkata, Chennai, Jakarta, HoChiMinhCity, HongKong}},
-            {Beijing,{Shanghai, Seoul}},
-            {Bogota,{MexicoCity, Lima, Miami, SaoPaulo, BuenosAires}},
-            {BuenosAires,{Bogota, SaoPaulo}},
-            {Cairo,{Algiers, Istanbul, Baghdad, Khartoum, Riyadh}},
-            {Chennai,{Mumbai, Delhi, Kolkata, Bangkok, Jakarta}},
-            {Chicago,{SanFrancisco, LosAngeles, MexicoCity, Atlanta, Montreal}},
-            {Delhi,{Tehran, Karachi, Mumbai, Chennai, Kolkata}},
-            {Essen,{London, Paris, Milan, StPetersburg}},
-            {HoChiMinhCity,{Jakarta, Bangkok, HongKong, Manila}},
-            {HongKong,{Bangkok, Kolkata, HoChiMinhCity, Shanghai, Manila, Taipei}},
-            {Istanbul,{Milan, Algiers, StPetersburg, Cairo, Baghdad, Moscow}},
-            {Jakarta,{Chennai, Bangkok, HoChiMinhCity, Sydney}},
-            {Johannesburg,{Kinshasa, Khartoum}},
-            {Karachi,{Tehran, Baghdad, Riyadh, Mumbai, Delhi}},
-            {Khartoum,{Cairo, Lagos, Kinshasa, Johannesburg}},
-            {Kinshasa,{Lagos, Khartoum, Johannesburg}},
-            {Kolkata,{Delhi, Chennai, Bangkok, HongKong}},
-            {Lagos,{SaoPaulo, Khartoum, Kinshasa}},
-            {Lima,{MexicoCity, Bogota, Santiago}},
-            {London,{NewYork, Madrid, Essen, Paris}},
-            {LosAngeles,{SanFrancisco, Chicago, MexicoCity, Sydney}},
-            {Madrid,{London, NewYork, Paris, SaoPaulo, Algiers}},
-            {Manila,{Taipei, SanFrancisco, HoChiMinhCity, Sydney, HongKong}},
-            {MexicoCity,{LosAngeles, Chicago, Miami, Lima, Bogota}},
-            {Miami,{Atlanta, MexicoCity, Washington, Bogota}},
-            {Milan,{Essen, Paris, Istanbul}},
-            {Montreal,{Chicago, Washington, NewYork}},
-            {Moscow,{StPetersburg, Istanbul, Tehran}},
-            {Mumbai,{Karachi, Delhi, Chennai}},
-            {NewYork,{Montreal, Washington, London, Madrid}},
-            {Osaka,{Taipei, Tokyo}},
-            {Paris,{Algiers, Essen, Madrid, Milan, London}},
-            {Riyadh,{Baghdad, Cairo, Karachi}},
-            {SanFrancisco,{LosAngeles, Chicago, Tokyo, Manila}},
-            {Santiago,{Lima}},
-            {SaoPaulo,{Bogota, BuenosAires, Lagos, Madrid}},
-            {Seoul,{Beijing, Shanghai, Tokyo}},
-            {Shanghai,{Beijing, HongKong, Taipei, Seoul, Tokyo}},
-            {StPetersburg,{Essen, Istanbul, Moscow}},
-            {Sydney,{Jakarta, Manila, LosAngeles}},
-            {Taipei,{Shanghai, HongKong, Osaka, Manila}},
-            {Tehran,{Baghdad, Moscow, Karachi, Delhi}},
-            {Tokyo,{Seoul, Shanghai, Osaka, SanFrancisco}},
-            {Washington,{Atlanta, NewYork, Montreal, Miami}}
-    };
-
     // board constructor
     Board::Board() {
         int i;
@@ -82,10 +30,12 @@ namespace pandemic {
             this->cities_cubes[i] = 0;
             string name_city = CITIES_NAMES[i];
             this->cities_names[i] = name_city;
-            this->research_stations.insert(pair<City(i), false>);
+            City city = city_by_index(i);
+            this->research_stations.insert({city, false});
         }
         for(i = 0; i < MAX_COLORS; i++) {
-            this->cures.insert(pair<Color(i), false>);
+            Color color = color_by_index(i);
+            this->cures.insert({color, false});
         }
 
     }
@@ -95,7 +45,7 @@ namespace pandemic {
     bool Board::is_clean() const {
         bool ans = true;
         for(int i = 0; i < MAX_CITIES; i++) {
-            if(get_city_cubes(i) > 0) {
+            if(get_city_cubes(city_by_index(i)) > 0) {
                 ans = false;
                 break;
             }
@@ -118,7 +68,7 @@ namespace pandemic {
     ostream& operator<<(ostream& ost, const Board& board) {
 
         for(int i = 0; i < MAX_CITIES; i++) {
-            ost << i << " [" << board.get_city_name(i) << "]: " << board.get_city_cubes(i) << endl;
+            ost << i << " [" << board.get_city_name(city_by_index(i)) << "]: " << board.get_city_cubes(city_by_index(i)) << endl;
         }
 
         return ost;

@@ -17,4 +17,5 @@ namespace pandemic {
         Black,
         Red
     };
+    Color color_by_index(const int i) { return static_cast<Color>(i); }
 }

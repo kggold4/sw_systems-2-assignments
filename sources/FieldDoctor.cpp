@@ -16,12 +16,12 @@
 using namespace pandemic;
 
 namespace pandemic {
-    FieldDoctor::FieldDoctor(Board& board, const int city) : Player(board, city) {
+    FieldDoctor::FieldDoctor(Board& board, const City city) : Player(board, city) {
         
     }
     FieldDoctor& FieldDoctor::treat(const City city) {
-        if(this->board.get_city_cubes(city) == 0) {
-            throw exception("given city not have disease cubes");
+        if(this->get_city_cubes(city) == 0) {
+            throw ("given city not have disease cubes");
         }
         if(has_cure(CITIES_COLORS[city])) {
             remove_all_city_cubes();

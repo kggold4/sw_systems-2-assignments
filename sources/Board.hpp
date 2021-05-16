@@ -63,6 +63,7 @@ namespace pandemic {
 
             // return true of if the given city has a research station
             bool has_research_station(const City city) { return this->research_stations.find(city)->second; }
+            void set_research_station(const City city) { this->research_stations.find(city)->second = true; }
 
             // return true if color has curve
             bool has_cure(const Color color) { return this->cures.find(color)->second; }

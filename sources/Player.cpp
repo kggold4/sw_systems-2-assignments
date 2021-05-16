@@ -15,9 +15,8 @@
 using namespace std;
 using namespace pandemic;
 
-const static unsigned int MAX_CITIES = 48;
 const static unsigned int MAX_COLORS = 4;
-const static unsigned in MAX_REMOVE_CARDS_IN_DISCOVER_CURE = 5;
+const static unsigned int MAX_REMOVE_CARDS_IN_DISCOVER_CURE = 5;
 
 namespace pandemic {
 
@@ -30,11 +29,11 @@ namespace pandemic {
     Player& Player::drive(const City city) {
         if(!valid_city(city)) { throw invalid_argument("invalid given city - do not exist"); }
         if(!has_card(city)) { throw invalid_argument("player do not have given city card"); }
-        Set<City> close_cities = city_map.at(this->current_city);
+        set<City> close_cities = city_map.at(this->current_city);
         for(auto &i : close_cities) {
             if(i == city) {
                 this->current_city = city;
-                if(rold() == "Medic") { remove_all_city_cubes(); }
+                if(role() == "Medic") { remove_all_city_cubes(); }
                 return *this;
             }
         }
@@ -45,19 +44,19 @@ namespace pandemic {
         if(!has_card(city)) { throw invalid_argument("player do not have given city card"); }
         this->current_city = city;
         this->player_cards.erase(city);
-        if(rold() == "Medic") { remove_all_city_cubes(); }
+        if(role() == "Medic") { remove_all_city_cubes(); }
         return *this;
     }
     Player& Player::fly_charter(const City city) {
         if(!valid_city(city)) { throw invalid_argument("invalid given city - do not exist"); }
         this->current_city = city;
         this->player_cards.erase(city);
-        if(rold() == "Medic") { remove_all_city_cubes(); }
+        if(role() == "Medic") { remove_all_city_cubes(); }
         return *this;
     }
     Player& Player::fly_shuttle(const City city) {
         if(!valid_city(city)) { throw invalid_argument("invalid given city - do not exist"); }
-        if(!this->has_research_station((this->current_city)) {
+        if(!this->has_research_station((this->current_city))) {
             throw invalid_argument("current city has no research station");
         } else {
             if(!this->has_research_station(city)) {
@@ -66,19 +65,19 @@ namespace pandemic {
                 this->current_city = city;
             }
         }
-        if(rold() == "Medic") { remove_all_city_cubes(); }
+        if(role() == "Medic") { remove_all_city_cubes(); }
         return *this;
     }
     Player& Player::build() {
-        if(!valid_city(city)) { throw invalid_argument("invalid given city - do not exist"); }
+        if(!valid_city(this->get_current_city())) { throw invalid_argument("invalid given city - do not exist"); }
         if(!has_card(this->current_city)) { throw invalid_argument("player do not have given city card"); }
         this->player_cards.erase(this->current_city);
-        this->research_stations.find(this->current_city)->second = true;
+        this->board.set_research_station(this->current_city);
         return *this;
     }
     Player& Player::discover_cure(const Color color) {
-        if(!has_research_station(this->current_city)) { throw exception("current city do not have research station"); }
-        if(!board.has_cure(color)) {
+        if(!has_research_station(this->current_city)) { throw ("current city do not have research station"); }
+        if(!has_cure(color)) {
 
             // checking if there enough cards with given color
             bool has_enough_cards = false;
@@ -94,7 +93,7 @@ namespace pandemic {
             }
 
             // not have enough cards with given color
-            if(!has_enough_cards) { throw exception("not enough cards with given color"); }
+            if(!has_enough_cards) { throw ("not enough cards with given color"); }
 
             // have enough cards with given color
             // removing cards with given color
@@ -108,14 +107,14 @@ namespace pandemic {
                     }
                 }
             }
-            this->board.set_cure(color);
+            this->set_cure(color);
         }
         return *this;
     }
     Player& Player::treat(const City city) {
         if(city != this->current_city) { throw invalid_argument("not in given city"); }
         if(this->board.get_city_cubes(this->current_city) == 0) {
-            throw exception("current city not have disease cubes");
+            throw ("current city not have disease cubes");
         }
         if(has_cure(CITIES_COLORS[this->current_city])) {
             remove_all_city_cubes();
@@ -125,7 +124,7 @@ namespace pandemic {
         return *this;
     }
     Player& Player::take_card(const City city) {
-        this->cards.insert(City(city));
+        this->player_cards.insert(City(city));
         return *this;
     }
     Player& Player::remove_cards() {

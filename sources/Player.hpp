@@ -34,6 +34,38 @@ namespace pandemic {
             // player set of cards
             set<City> player_cards;
 
+        public:
+
+            // constructor
+            Player(Board& board, const City city);
+
+            // de-constructor
+            ~Player();
+
+            // drive to given near city (if not near throw exception)
+            virtual Player& drive(const City city);
+
+            // fly to another city
+            virtual Player& fly_direct(const City city);
+            virtual Player& fly_charter(const City city);
+            virtual Player& fly_shuttle(const City city);
+            virtual Player& build();
+            virtual Player& discover_cure(const Color color);
+            virtual Player& treat(const City city);
+            virtual Player& take_card(const City city);
+            virtual Player& remove_cards();
+            string role() const;
+
+            // return true if color has curve
+            bool has_cure(const Color color) { return this->board.has_cure(color); }
+            void set_cure(const Color color) { this->board.set_cure(color); }
+            void del_cure(const Color color) { this->board.del_cure(color); }
+            set<City> get_player_cards() const { return this->player_cards; };
+            void erase_card(City card) { this->player_cards.erase(card); }
+            City get_current_city() const { return this->current_city; }
+            void set_current_city(const City city) { this->current_city = city; };
+            int get_city_cubes(City city) const  { return this->board.get_city_cubes(city); }
+
             // return true if the player have the given city card
             bool has_card(City city) {
                 if(cards_is_empty()) { throw invalid_argument("player do not have cards"); }
@@ -70,26 +102,8 @@ namespace pandemic {
                 this->board.decrease_city_cubes(this->current_city);
             }
 
-        public:
-
-            // constructor
-            Player(Board& board, const City city);
-
-            // de-constructor
-            ~Player();
-
-            // drive to given near city (if not near throw exception)
-            virtual Player& drive(const City city);
-
-            // fly to another city
-            virtual Player& fly_direct(const City city);
-            virtual Player& fly_charter(const City city);
-            virtual Player& fly_shuttle(const City city);
-            virtual Player& build();
-            virtual Player& discover_cure(const Color color);
-            virtual Player& treat(const City city);
-            virtual Player& take_card(const City city);
-            virtual Player& remove_cards();
-            string role() const;
+            // return true of if the given city has a research station
+            bool has_research_station(const City city) { return this->board.has_research_station(city); }
+            void set_research_station(const City city) { this->board.set_research_station(city); }
     };
 }

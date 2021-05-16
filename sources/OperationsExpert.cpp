@@ -16,13 +16,13 @@
 using namespace pandemic;
 
 namespace pandemic {
-    OperationsExpert::OperationsExpert(Board& board, const int city): Player(board, city) {
+    OperationsExpert::OperationsExpert(Board& board, const City city): Player(board, city) {
         
     }
     OperationsExpert& OperationsExpert::build() {
-        if(!valid_city(city)) { throw invalid_argument("invalid given city - do not exist"); }
-        if(!has_card(this->current_city)) { throw invalid_argument("player do not have given city card"); }
-        this->research_stations.find(this->current_city)->second = true;
+        if(!valid_city(this->get_current_city())) { throw invalid_argument("invalid given city - do not exist"); }
+        if(!has_card(this->get_current_city())) { throw invalid_argument("player do not have given city card"); }
+        set_research_station(this->get_current_city());
         return *this;
     }
 }

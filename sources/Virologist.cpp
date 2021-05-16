@@ -16,14 +16,14 @@
 using namespace pandemic;
 
 namespace pandemic {
-    Virologist::Virologist(Board& board, const int city) : Player(board, city) {
+    Virologist::Virologist(Board& board, const City city) : Player(board, city) {
 
     }
     Virologist& Virologist::treat(const City city) {
-        if(this->board.get_city_cubes(this->city) == 0) {
-            throw exception("current city not have disease cubes");
+        if(this->get_city_cubes(this->get_current_city()) == 0) {
+            throw ("current city not have disease cubes");
         }
-        if(has_cure(CITIES_COLORS[this->city])) {
+        if(has_cure(CITIES_COLORS[this->get_current_city()])) {
             remove_all_city_cubes();
         } else {
             decrease_city_cubes();
