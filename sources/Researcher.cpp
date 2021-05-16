@@ -50,7 +50,8 @@ namespace pandemic {
                     }
                 }
             }
-            this->curves.find(color)->second = true;
+            this->board.set_cure(color);
+//            this->curves.find(color)->second = true;
         }
         return *this;
     }

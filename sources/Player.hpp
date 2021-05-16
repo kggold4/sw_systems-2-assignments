@@ -22,6 +22,7 @@ const static unsigned int MAX_CITIES = 48;
 
 namespace pandemic {
     class Player {
+
         private:
 
             // player board

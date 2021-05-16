@@ -66,7 +66,7 @@ namespace pandemic {
 
             // return true if color has curve
             bool has_cure(const Color color) { return this->cures.find(color)->second; }
-            void set_cure(const Color color) { this->cures.find(color) = true; }
-            void del_cure(const Color color) { this->cures.find(color) = false; }
+            void set_cure(const Color color) { this->cures.find(color)->second = true; }
+            void del_cure(const Color color) { this->cures.find(color)->second = false; }
     };
 }
