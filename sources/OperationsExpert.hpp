@@ -19,7 +19,7 @@ using namespace pandemic;
 namespace pandemic {
     class OperationsExpert : public Player {
         public:
-            OperationsExpert(Board& board, const City city);
-            OperationsExpert& build() override;
+            OperationsExpert(Board& board, const City city): Player(board, city) {};
+            Player& build() override;
     };
 }

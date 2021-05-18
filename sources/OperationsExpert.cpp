@@ -16,13 +16,8 @@
 using namespace pandemic;
 
 namespace pandemic {
-    OperationsExpert::OperationsExpert(Board& board, const City city): Player(board, city) {
-        
-    }
-    OperationsExpert& OperationsExpert::build() {
-        if(!valid_city(this->get_current_city())) { throw invalid_argument("invalid given city - do not exist"); }
-        if(!has_card(this->get_current_city())) { throw invalid_argument("player do not have given city card"); }
-        set_research_station(this->get_current_city());
+    Player& OperationsExpert::build() {
+        this->board.set_research_station(this->current_city);
         return *this;
     }
 }

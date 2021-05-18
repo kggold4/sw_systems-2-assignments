@@ -40,6 +40,10 @@ namespace pandemic {
             // de-constructor
             ~Board();
 
+            /**
+             * board methods
+             */
+
             // return true if all the cities that on the board are clean from disease
             bool is_clean();
 
@@ -59,16 +63,13 @@ namespace pandemic {
              * cities methods
              */
 
-
-
             // return a number of cubes in a city (0 <= i < 48)
             int get_city_cubes(const City city) const { return this->cities_cubes.at(city); }
 
-            void increase_city_cubes(const City city) { this->cities_cubes.at(city)+=1; }
-            void decrease_city_cubes(const City city) { this->cities_cubes.at(city)-=1; }
-
             // return true of if the given city has a research station
             bool has_research_station(const City city) { return this->research_stations.find(city)->second; }
+
+            // set city as have a research station
             void set_research_station(const City city) { this->research_stations.find(city)->second = true; }
 
             /**

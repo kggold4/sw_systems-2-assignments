@@ -68,17 +68,56 @@ namespace pandemic {
         Washington
     };
 
-    // all cities names
-    static const string CITIES_NAMES[] = {"Algiers", "Atlanta", "Baghdad", "Bangkok", "Beijing", "Bogota", "BuenosAires", "Cairo", "Chennai", "Chicago", "Delhi", "Essen", "HoChiMinhCity", "HongKong", "Istanbul", "Jakarta", "Johannesburg", "Karachi", "Khartoum", "Kinshasa", "Kolkata", "Lagos", "Lima", "London", "LosAngeles", "Madrid", "Manila", "MexicoCity", "Miami", "Milan", "Montreal", "Moscow", "Mumbai", "NewYork", "Osaka", "Paris", "Riyadh", "SanFrancisco", "Santiago", "SaoPaulo", "Seoul", "Shanghai", "StPetersburg", "Sydney", "Taipei", "Tehran", "Tokyo", "Washington"};
-
-    // all cities colors
-    static const Color CITIES_COLORS[] = {Black, Blue, Black, Red, Red, Yellow, Yellow, Black, Black, Blue, Black, Blue, Red, Red, Black, Red, Yellow, Black, Yellow, Yellow, Black, Yellow, Yellow, Blue, Yellow, Blue, Red, Yellow, Yellow, Blue, Blue, Black, Black, Blue, Red, Blue, Black, Blue, Yellow, Yellow, Red, Red, Blue, Red, Red, Black, Red, Blue};
-
-    // get city and return it's index
-    static City city_by_index(const int i) { return static_cast<City>(i); }
-
-    // return a name of a city (0 <= i < 48)
-    static string get_city_name(const City city) const { return CITIES_NAMES[city_by_index(city)]; }
+    static const Map<City, Color> CITIES_MAP {
+            { Algiers, Black },
+            { Atlanta, Blue },
+            { Baghdad, Black },
+            { Bangkok, Red },
+            { Beijing, Red },
+            { Bogota, Yellow },
+            { BuenosAires, Yellow },
+            { Cairo, Black },
+            { Chennai, Black },
+            { Chicago, Blue },
+            { Delhi, Black },
+            { Essen, Blue },
+            { HoChiMinhCity, Red },
+            { HongKong, Red },
+            { Istanbul, Black },
+            { Jakarta, Red },
+            { Johannesburg, Yellow },
+            { Karachi, Black },
+            { Khartoum, Yellow },
+            { Kinshasa, Yellow },
+            { Kolkata, Black },
+            { Lagos, Yellow },
+            { Lima, Yellow },
+            { London, Blue },
+            { LosAngeles, Yellow },
+            { Madrid, Blue },
+            { Manila, Red },
+            { MexicoCity, Yellow },
+            { Miami, Yellow },
+            { Milan, Blue },
+            { Montreal, Blue },
+            { Moscow, Black },
+            { Mumbai, Black },
+            { NewYork, Blue },
+            { Osaka, Red },
+            { Paris, Blue },
+            { Riyadh, Black },
+            { SanFrancisco, Blue },
+            { Santiago, Yellow },
+            { SaoPaulo, Yellow },
+            { Seoul, Red },
+            { Shanghai, Red },
+            { StPetersburg, Blue },
+            { Sydney, Red },
+            { Taipei, Red },
+            { Tehran, Black },
+            { Tokyo, Red },
+            { Washington, Blue }
+    };
 
     // connections between cities
     static const map<City, set<City>> city_map {
@@ -131,4 +170,13 @@ namespace pandemic {
             {Tokyo,{Seoul, Shanghai, Osaka, SanFrancisco}},
             {Washington,{Atlanta, NewYork, Montreal, Miami}}
     };
+
+    // get city and return it's index
+    static City city_by_index(const int i) { return static_cast<City>(i); }
+
+    // return a name of a city (0 <= i < 48)
+    static string get_city_name(const City city) const { return CITIES_NAMES[city_by_index(city)]; }
+
+    // return the city color
+    static Color get_city_color(const City city) { return CITIES_MAP.at(city); }
 }
