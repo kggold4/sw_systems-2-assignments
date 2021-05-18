@@ -20,9 +20,9 @@ namespace pandemic {
 
     }
     Virologist& Virologist::treat(const City city) {
-        if(this->get_city_cubes(this->get_current_city()) == 0) {
-            throw ("current city not have disease cubes");
-        }
+//        if(this->get_city_cubes(this->get_current_city()) == 0) {
+//            throw ("current city not have disease cubes");
+//        }
         if(has_cure(CITIES_COLORS[this->get_current_city()])) {
             remove_all_city_cubes();
         } else {

@@ -26,11 +26,12 @@ namespace pandemic {
     // board constructor
     Board::Board() {
         int i;
-        for(int i = 0; i < MAX_CITIES; i++) {
-            this->cities_cubes[i] = 0;
+        for(i = 0; i < MAX_CITIES; i++) {
+
+            City city = city_by_index_enum(i);
+            this->cities_cubes[city] = 0;
             string name_city = CITIES_NAMES[i];
             this->cities_names[i] = name_city;
-            City city = city_by_index_enum(i);
             this->research_stations.insert({city, false});
         }
         for(i = 0; i < MAX_COLORS; i++) {
@@ -42,35 +43,43 @@ namespace pandemic {
 
     Board::~Board() {}
 
-    bool Board::is_clean() const {
+    bool Board::is_clean() {
         bool ans = true;
-        for(int i = 0; i < MAX_CITIES; i++) {
-            if(get_city_cubes(city_by_index_enum(i)) > 0) {
+        map<City, int>::iterator it = this->cities_cubes.begin();
+        while(it != this->cities_cubes.end()) {
+            if(it->second > 0) {
                 ans = false;
                 break;
             }
+            it++;
         }
         return ans;
     }
 
     void Board::remove_cures() {
-
+        map<Color, bool>::iterator it = this->cures.begin();
+        while(it != this->cures.end()) {
+            it->second = false;
+            it++;
+        }
     }
     
     void Board::remove_stations() {
-
+        map<City, bool>::iterator it = this->research_stations.begin();
+        while(it != this->research_stations.end()) {
+            it->second = false;
+            it++;
+        }
     }
 
-    int& Board::operator[](int city) {
-        return cities_cubes[city];
+    int& Board::operator[](City city) {
+        return this->cities_cubes[city];
     }
 
     ostream& operator<<(ostream& ost, const Board& board) {
-
         for(int i = 0; i < MAX_CITIES; i++) {
             ost << i << " [" << board.get_city_name(city_by_index_enum(i)) << "]: " << board.get_city_cubes(city_by_index_enum(i)) << endl;
         }
-
         return ost;
     }
 }

@@ -22,7 +22,7 @@ namespace pandemic {
     class Board {
         private:
             // disease cube in each city
-            map<int, int> cities_cubes;
+            map<City, int> cities_cubes;
 
             // each city has name
             map<int, string> cities_names;
@@ -40,12 +40,12 @@ namespace pandemic {
             // de-constructor
             ~Board();
 
-            bool is_clean() const;
+            bool is_clean();
             void remove_cures();
             void remove_stations();
 
             // get reference of city in cities_cubes map
-            int& operator[](int city);
+            int& operator[](City city);
 
             // output ostream
             friend ostream& operator<<(ostream& ost, const Board& board);
@@ -58,8 +58,8 @@ namespace pandemic {
             // return a number of cubes in a city (0 <= i < 48)
             int get_city_cubes(const City city) const { return this->cities_cubes.at(city); }
 
-            void increase_city_cubes(const City city) { this->cities_cubes.at(city)++; }
-            void decrease_city_cubes(const City city) { this->cities_cubes.at(city)--; }
+            void increase_city_cubes(const City city) { this->cities_cubes.at(city)+=1; }
+            void decrease_city_cubes(const City city) { this->cities_cubes.at(city)-=1; }
 
             // return true of if the given city has a research station
             bool has_research_station(const City city) { return this->research_stations.find(city)->second; }

@@ -50,6 +50,9 @@ namespace pandemic {
     Player& Player::fly_charter(const City city) {
         if(!valid_city(city)) { throw invalid_argument("invalid given city - do not exist"); }
         //if(!has_card(city)) { throw invalid_argument("player do not have given city card"); }
+        if(!this->has_research_station(city)) {
+            throw invalid_argument("given city has no research station");
+        }
         this->current_city = city;
         this->player_cards.erase(city);
         if(role() == "Medic") { remove_all_city_cubes(); }
@@ -57,15 +60,12 @@ namespace pandemic {
     }
     Player& Player::fly_shuttle(const City city) {
         if(!valid_city(city)) { throw invalid_argument("invalid given city - do not exist"); }
-        if(!this->has_research_station((this->current_city))) {
-            throw invalid_argument("current city has no research station");
-        } else {
-            if(!this->has_research_station(city)) {
-                throw invalid_argument("given city has no research station");
-            } else {
-                this->current_city = city;
-            }
-        }
+        this->current_city = city;
+//        if(!this->has_research_station(city)) {
+//            throw invalid_argument("given city has no research station");
+//        } else {
+//
+//        }
         if(role() == "Medic") { remove_all_city_cubes(); }
         return *this;
     }
@@ -114,10 +114,10 @@ namespace pandemic {
     }
     Player& Player::treat(const City city) {
         if(city != this->current_city) { throw invalid_argument("not in given city"); }
-        if(this->board.get_city_cubes(this->current_city) == 0) {
-            throw ("current city not have disease cubes");
-        }
-        if(has_cure(CITIES_COLORS[this->current_city])) {
+//        if(this->board.get_city_cubes(this->current_city) == 0) {
+//            throw ("current city not have disease cubes");
+//        }
+        if(has_cure(CITIES_COLORS[city])) {
             remove_all_city_cubes();
         } else {
             decrease_city_cubes();

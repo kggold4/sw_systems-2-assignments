@@ -21,9 +21,9 @@ namespace pandemic {
     }
     Medic& Medic::treat(const City city) {
         if(city != this->get_current_city()) { throw invalid_argument("not in given city"); }
-        if(this->get_city_cubes(this->get_current_city()) == 0) {
-            throw ("current city not have disease cubes");
-        }
+//        if(this->get_city_cubes(city) == 0) {
+//            throw ("current city not have disease cubes");
+//        }
         remove_all_city_cubes();
         return *this;
     }

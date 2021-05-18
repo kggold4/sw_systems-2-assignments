@@ -99,7 +99,7 @@ namespace pandemic {
             }
 
             void decrease_city_cubes() {
-                this->board.decrease_city_cubes(this->current_city);
+                this->board[this->current_city]--;
             }
 
             // return true of if the given city has a research station
