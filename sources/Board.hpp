@@ -40,8 +40,13 @@ namespace pandemic {
             // de-constructor
             ~Board();
 
+            // return true if all the cities that on the board are clean from disease
             bool is_clean();
+
+            // remove all cures from all the cities that on the board
             void remove_cures();
+
+            // remove all the research stations from all the cities that on the board
             void remove_stations();
 
             // get reference of city in cities_cubes map
@@ -50,10 +55,11 @@ namespace pandemic {
             // output ostream
             friend ostream& operator<<(ostream& ost, const Board& board);
 
-            // cities methods on boards:
+            /**
+             * cities methods
+             */
 
-            // return a name of a city (0 <= i < 48)
-            string get_city_name(const City city) const { return this->cities_names.at(city); }
+
 
             // return a number of cubes in a city (0 <= i < 48)
             int get_city_cubes(const City city) const { return this->cities_cubes.at(city); }
@@ -65,9 +71,16 @@ namespace pandemic {
             bool has_research_station(const City city) { return this->research_stations.find(city)->second; }
             void set_research_station(const City city) { this->research_stations.find(city)->second = true; }
 
+            /**
+             * colors methods
+             */
             // return true if color has curve
             bool has_cure(const Color color) { return this->cures.find(color)->second; }
+
+            // set cure of color
             void set_cure(const Color color) { this->cures.find(color)->second = true; }
+
+            // delete cure of color
             void del_cure(const Color color) { this->cures.find(color)->second = false; }
     };
 }

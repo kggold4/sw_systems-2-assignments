@@ -67,9 +67,19 @@ namespace pandemic {
         Tokyo,
         Washington
     };
-    static City city_by_index_enum(const int i) { return static_cast<City>(i); }
+
+    // all cities names
     static const string CITIES_NAMES[] = {"Algiers", "Atlanta", "Baghdad", "Bangkok", "Beijing", "Bogota", "BuenosAires", "Cairo", "Chennai", "Chicago", "Delhi", "Essen", "HoChiMinhCity", "HongKong", "Istanbul", "Jakarta", "Johannesburg", "Karachi", "Khartoum", "Kinshasa", "Kolkata", "Lagos", "Lima", "London", "LosAngeles", "Madrid", "Manila", "MexicoCity", "Miami", "Milan", "Montreal", "Moscow", "Mumbai", "NewYork", "Osaka", "Paris", "Riyadh", "SanFrancisco", "Santiago", "SaoPaulo", "Seoul", "Shanghai", "StPetersburg", "Sydney", "Taipei", "Tehran", "Tokyo", "Washington"};
+
+    // all cities colors
     static const Color CITIES_COLORS[] = {Black, Blue, Black, Red, Red, Yellow, Yellow, Black, Black, Blue, Black, Blue, Red, Red, Black, Red, Yellow, Black, Yellow, Yellow, Black, Yellow, Yellow, Blue, Yellow, Blue, Red, Yellow, Yellow, Blue, Blue, Black, Black, Blue, Red, Blue, Black, Blue, Yellow, Yellow, Red, Red, Blue, Red, Red, Black, Red, Blue};
+
+    // get city and return it's index
+    static City city_by_index(const int i) { return static_cast<City>(i); }
+
+    // return a name of a city (0 <= i < 48)
+    static string get_city_name(const City city) const { return CITIES_NAMES[city_by_index(city)]; }
+
     // connections between cities
     static const map<City, set<City>> city_map {
             {Algiers,{Madrid, Paris, Istanbul, Cairo}},
