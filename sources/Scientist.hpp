@@ -21,7 +21,7 @@ namespace pandemic {
         private:
             int n;
         public:
-            Scientist(Board& board, const City city, int n);
-            Scientist& discover_cure(const Color color) override;
+            Scientist(Board& board, const City city, const int n);
+            Player& discover_cure(const Color color) override;
     };
 }

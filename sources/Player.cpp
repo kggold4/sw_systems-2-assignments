@@ -20,25 +20,18 @@ const static unsigned int MAX_REMOVE_CARDS_IN_DISCOVER_CURE = 5;
 
 namespace pandemic {
 
-    Player::Player(Board& board, const City city) {
-        this->board = board;
-        this->current_city = city;
-    }
+    Player::Player(Board& board, const City city): board(board), current_city(city) { role_type = "Player"; }
     Player::~Player() {}
 
     Player& Player::drive(const City city) {
         if(this->current_city == city) { throw invalid_argument("cannot drive to same city: " + get_city_name(city)); }
         if(!valid_city(city)) { throw invalid_argument("invalid given city - do not exist"); }
-        set<City> close_cities = city_map.at(city);
-        for(auto &i : close_cities) {
-            if(i == city) {
-                this->current_city = city;
-                if(role() == "Medic" && this->board.has_cure(get_city_color(city))) { board[city] = 0; }
-                return *this;
-            }
-        }
-        throw invalid_argument("given city " + get_city_name(city) + " is not connection to current city " +
-                                       get_city_name(this->current_city));
+        if(!is_connected_cities(this->current_city, city)) { throw invalid_argument("given city " + get_city_name(city) +
+                                                                            " is not connection to current city " +
+                                                                            get_city_name(this->current_city)); }
+        this->current_city = city;
+        if(role() == "Medic" && this->board.has_cure(get_city_color(city))) { board[city] = 0; }
+        return *this;
     }
     Player& Player::fly_direct(const City city) {
         if(!valid_city(city)) { throw invalid_argument("invalid given city - do not exist"); }
@@ -51,9 +44,9 @@ namespace pandemic {
     }
     Player& Player::fly_charter(const City city) {
         if(!valid_city(city)) { throw invalid_argument("invalid given city - do not exist"); }
-        if(!has_card(city)) { throw invalid_argument("player do not have given city card"); }
+        if(!has_card(this->current_city)) { throw invalid_argument("player do not have given city card, role: " + role()); }
         if(this->current_city == city) { throw invalid_argument("cannot drive to same city: " + get_city_name(city)); }
-        remove_card(city);
+        remove_card(this->current_city);
         this->current_city = city;
         if(role() == "Medic" && this->board.has_cure(get_city_color(city))) { board[city] = 0; }
         return *this;
@@ -101,10 +94,10 @@ namespace pandemic {
         // removing cards with given color
         int counter_remove_cards = 0;
         for(auto &card : this->player_cards) {
-            if (get_city_color(color) == color) {
-                this->player_cards = this->player_cards.erase(card);
+            if (get_city_color(card) == color) {
+                remove_card(card);
                 counter_remove_cards++;
-                if (counter_remove_cards == MAX_REMOVE_CARDS_IN_DISCOVER_CURE) {
+                if(counter_remove_cards == MAX_REMOVE_CARDS_IN_DISCOVER_CURE) {
                     break;
                 }
             }
@@ -132,6 +125,6 @@ namespace pandemic {
         return *this;
     }
     string Player::role() const {
-        return typeid(this).name();
+        return this->role_type;
     }
 }

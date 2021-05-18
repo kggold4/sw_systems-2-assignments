@@ -12,6 +12,7 @@
 
 #include <set>
 #include <map>
+#include "string"
 #include "Board.hpp"
 #include "Color.hpp"
 #include "City.hpp"
@@ -33,6 +34,10 @@ namespace pandemic {
 
             // player set of cards
             set<City> player_cards;
+
+            // role type
+            string role_type;
+
 
         public:
 
@@ -71,12 +76,7 @@ namespace pandemic {
             }
 
             // remove card from player cards
-            void remove_card(City city) {
-
-                // if card not found
-                if(!has_card(city)) { throw invalid_argument("player does not gave the given city card"); }
-                this->player_cards.erase(city);
-            }
+            void remove_card(City city) { this->player_cards.erase(city); }
 
             // check if city is valid
             bool valid_city(const City city) const {

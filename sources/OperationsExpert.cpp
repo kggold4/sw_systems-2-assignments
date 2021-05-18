@@ -16,6 +16,9 @@
 using namespace pandemic;
 
 namespace pandemic {
+    OperationsExpert::OperationsExpert(Board& board, const City city): Player(board, city) {
+        this->role_type="OperationsExpert";
+    }
     Player& OperationsExpert::build() {
         this->board.set_research_station(this->current_city);
         return *this;

@@ -68,7 +68,7 @@ namespace pandemic {
         Washington
     };
 
-    static const Map<City, Color> CITIES_MAP {
+    static const map<City, Color> CITIES_MAP {
             { Algiers, Black },
             { Atlanta, Blue },
             { Baghdad, Black },
@@ -171,12 +171,26 @@ namespace pandemic {
             {Washington,{Atlanta, NewYork, Montreal, Miami}}
     };
 
+    static const string CITIES_NAMES[] = {"Algiers", "Atlanta", "Baghdad", "Bangkok", "Beijing", "Bogota", "BuenosAires", "Cairo", "Chennai", "Chicago", "Delhi", "Essen", "HoChiMinhCity", "HongKong", "Istanbul", "Jakarta", "Johannesburg", "Karachi", "Khartoum", "Kinshasa", "Kolkata", "Lagos", "Lima", "London", "LosAngeles", "Madrid", "Manila", "MexicoCity", "Miami", "Milan", "Montreal", "Moscow", "Mumbai", "NewYork", "Osaka", "Paris", "Riyadh", "SanFrancisco", "Santiago", "SaoPaulo", "Seoul", "Shanghai", "StPetersburg", "Sydney", "Taipei", "Tehran", "Tokyo", "Washington"};
+
     // get city and return it's index
     static City city_by_index(const int i) { return static_cast<City>(i); }
 
     // return a name of a city (0 <= i < 48)
-    static string get_city_name(const City city) const { return CITIES_NAMES[city_by_index(city)]; }
+    static string get_city_name(const City city) { return CITIES_NAMES[city_by_index(city)]; }
 
     // return the city color
     static Color get_city_color(const City city) { return CITIES_MAP.at(city); }
+
+    static bool is_connected_cities(const City city_a, const City city_b) {
+        bool ans = false;
+        set<City> close_cities = city_map.at(city_a);
+        for(auto &city : close_cities) {
+            if(city == city_b) {
+                ans = true;
+            }
+        }
+        return ans;
+    }
+
 }

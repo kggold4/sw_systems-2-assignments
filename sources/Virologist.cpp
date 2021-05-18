@@ -16,17 +16,21 @@
 using namespace pandemic;
 
 namespace pandemic {
-    Virologist::Virologist(Board& board, const City city) : Player(board, city) {
 
-    }
-    Virologist& Virologist::treat(const City city) {
-//        if(this->get_city_cubes(this->get_current_city()) == 0) {
-//            throw ("current city not have disease cubes");
-//        }
-        if(has_cure(CITIES_COLORS[this->get_current_city()])) {
-            remove_all_city_cubes();
+    Virologist::Virologist(Board& board, const City city) : Player(board, city) { this->role_type="Virologist"; }
+    Player& Virologist::treat(const City city) {
+        if(city != this->current_city) {
+            if(!has_card(city)) {
+                throw invalid_argument("player do not have given city card: " + get_city_name(city));
+            }
+            remove_card(city);
+        }
+        if(this->board[city] == 0) { throw invalid_argument("current city not have disease cubes"); }
+        if(this->board.has_cure(get_city_color(city))) {
+            this->board[city] = 0;
+            return *this;
         } else {
-            decrease_city_cubes();
+            this->board[city]--;
         }
         return *this;
     }

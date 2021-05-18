@@ -16,18 +16,16 @@
 using namespace pandemic;
 
 namespace pandemic {
-    FieldDoctor::FieldDoctor(Board& board, const City city) : Player(board, city) {
-        
-    }
-    FieldDoctor& FieldDoctor::treat(const City city) {
-        if(this->get_city_cubes(city) == 0) {
-            throw ("given city not have disease cubes");
+
+    FieldDoctor::FieldDoctor(Board& board, const City city) : Player(board, city) { this->role_type="FieldDoctor"; }
+    Player& FieldDoctor::treat(const City city) {
+        if(!valid_city(city)) { throw invalid_argument("invalid given city - do not exist"); }
+        if(city != this->current_city && !is_connected_cities(this->current_city, city)) {
+            throw invalid_argument("not in given city");
         }
-        if(has_cure(CITIES_COLORS[city])) {
-            remove_all_city_cubes();
-        } else {
-            decrease_city_cubes();
-        }
+        if(this->board[city] == 0) { throw invalid_argument("given city not have disease cubes"); }
+        if(this->board.has_cure(get_city_color(city))) { this->board[city] = 0; }
+        else { this->board[city]--; }
         return *this;
     }
 }

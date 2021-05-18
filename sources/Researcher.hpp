@@ -20,6 +20,6 @@ namespace pandemic {
     class Researcher : public Player {
         public:
             Researcher(Board& board, const City city);
-            Researcher& discover_cure(const Color color) override;
+            Player& discover_cure(const Color color) override;
     };
 }

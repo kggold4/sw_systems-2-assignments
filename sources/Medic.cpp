@@ -16,15 +16,13 @@
 using namespace pandemic;
 
 namespace pandemic {
-    Medic::Medic(Board& board, const City city) : Player(board, city) {
 
-    }
-    Medic& Medic::treat(const City city) {
-        if(city != this->get_current_city()) { throw invalid_argument("not in given city"); }
-//        if(this->get_city_cubes(city) == 0) {
-//            throw ("current city not have disease cubes");
-//        }
-        remove_all_city_cubes();
+    Medic::Medic(Board& board, const City city) : Player(board, city) { this->role_type="Medic"; }
+    Player& Medic::treat(const City city) {
+        if(!valid_city(city)) { throw invalid_argument("invalid given city - do not exist"); }
+        if(city != this->current_city) { throw invalid_argument("not in given city"); }
+        if(this->board[city] == 0) { throw invalid_argument("current city not have disease cubes"); }
+        this->board[city] = 0;
         return *this;
     }
 }

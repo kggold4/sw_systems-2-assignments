@@ -20,6 +20,6 @@ namespace pandemic {
     class FieldDoctor : public Player {
         public:
             FieldDoctor(Board& board, const City city);
-            FieldDoctor& treat(const City city) override;
+            Player& treat(const City city) override;
     };
 }

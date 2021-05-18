@@ -28,14 +28,14 @@ namespace pandemic {
         int i;
         for(i = 0; i < MAX_CITIES; i++) {
 
-            City city = city_by_index_enum(i);
+            City city = city_by_index(i);
             this->cities_cubes[city] = 0;
             string name_city = CITIES_NAMES[i];
             this->cities_names[i] = name_city;
             this->research_stations.insert({city, false});
         }
         for(i = 0; i < MAX_COLORS; i++) {
-            Color color = color_by_index_enum(i);
+            Color color = color_by_index(i);
             this->cures.insert({color, false});
         }
 
@@ -78,7 +78,7 @@ namespace pandemic {
 
     ostream& operator<<(ostream& ost, const Board& board) {
         for(int i = 0; i < MAX_CITIES; i++) {
-            ost << i << " [" << board.get_city_name(city_by_index_enum(i)) << "]: " << board.get_city_cubes(city_by_index_enum(i)) << endl;
+            //ost << i << " [" << get_city_name(city_by_index(i)) << "]: " << board[(city_by_index(i))] << endl;
         }
         return ost;
     }
