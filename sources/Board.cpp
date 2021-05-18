@@ -30,11 +30,11 @@ namespace pandemic {
             this->cities_cubes[i] = 0;
             string name_city = CITIES_NAMES[i];
             this->cities_names[i] = name_city;
-            City city = city_by_index(i);
+            City city = city_by_index_enum(i);
             this->research_stations.insert({city, false});
         }
         for(i = 0; i < MAX_COLORS; i++) {
-            Color color = color_by_index(i);
+            Color color = color_by_index_enum(i);
             this->cures.insert({color, false});
         }
 
@@ -45,7 +45,7 @@ namespace pandemic {
     bool Board::is_clean() const {
         bool ans = true;
         for(int i = 0; i < MAX_CITIES; i++) {
-            if(get_city_cubes(city_by_index(i)) > 0) {
+            if(get_city_cubes(city_by_index_enum(i)) > 0) {
                 ans = false;
                 break;
             }
@@ -68,7 +68,7 @@ namespace pandemic {
     ostream& operator<<(ostream& ost, const Board& board) {
 
         for(int i = 0; i < MAX_CITIES; i++) {
-            ost << i << " [" << board.get_city_name(city_by_index(i)) << "]: " << board.get_city_cubes(city_by_index(i)) << endl;
+            ost << i << " [" << board.get_city_name(city_by_index_enum(i)) << "]: " << board.get_city_cubes(city_by_index_enum(i)) << endl;
         }
 
         return ost;

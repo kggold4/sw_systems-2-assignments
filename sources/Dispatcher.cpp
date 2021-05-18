@@ -22,7 +22,7 @@ namespace pandemic {
     }
     Dispatcher& Dispatcher::fly_direct(const City city) {
         if(!valid_city(city)) { throw invalid_argument("invalid given city - do not exist"); }
-        if(!has_card(city)) { throw invalid_argument("player do not have given city card"); }
+        //if(!has_card(city)) { throw invalid_argument("player do not have given city card"); }
         this->set_current_city(city);
         return *this;
     }
