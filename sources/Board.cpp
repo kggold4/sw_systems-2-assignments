@@ -72,9 +72,10 @@ namespace pandemic {
 
         out << "output";
 
-//        map<City, Color>::iterator it = CITIES_MAP.begin();
+//        map<City, Color> temp_city_map(CITIES_MAP);
+//        map<City, Color>::iterator it = temp_city_map.begin();
 //        while(it != CITIES_MAP.end()) {
-//            out << "City: " << it->first << ", Color: " << it->second << ", Number of Disease Cubes: " << board.cities_cubes.at(*it);
+//            //out << "City: " << it->first << ", Color: " << it->second << ", Number of Disease Cubes: " << board.get_city_cubes(it->first);
 //            it++;
 //        }
         return out;
