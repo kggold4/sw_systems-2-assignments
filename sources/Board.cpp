@@ -70,18 +70,12 @@ namespace pandemic {
 
     ostream& operator<<(ostream& out, const Board& board) {
 
-        out << "output";
-
+        out << "Board:" << endl;
+        int index = 1;
         for(const auto c: CITIES_MAP) {
-            cout << "City: " << get_city_name(c.first) << ", Color: " << get_color_name(c.second) << ",,," << endl;
+            cout << index << ") City: " << get_city_name(c.first) << ", Color: " << get_color_name(c.second) << ", Disease Cubes: " << board.cities_cubes.at(c.first) << ", Has research station: " << board.research_stations.at(c.first) << ", Has cure: " << board.cures.at(c.second) << endl;
+            index++;
         }
-
-//        map<City, Color> temp_city_map(CITIES_MAP);
-//        map<City, Color>::iterator it = temp_city_map.begin();
-//        while(it != CITIES_MAP.end()) {
-//            //out << "City: " << it->first << ", Color: " << it->second << ", Number of Disease Cubes: " << board.get_city_cubes(it->first);
-//            it++;
-//        }
         return out;
     }
 }

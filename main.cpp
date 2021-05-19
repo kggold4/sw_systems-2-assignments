@@ -37,7 +37,7 @@ Color get_color() {
         if(color_id < 0 || color_id > 4) {
             cout << "Invalid color - please try again" << endl << endl;
         } else {
-            return color_by_index(color_id);
+            return color_by_index(color_id-1);
         }
     }
 }
@@ -52,7 +52,7 @@ City get_city() {
         if(city_id < 0 || city_id > 48) {
             cout << "Invalid city - please try again" << endl << endl;
         } else {
-            return city_by_index(city_id);
+            return city_by_index(city_id-1);
         }
     }
 }
@@ -125,86 +125,99 @@ int main() {
 
     while(true) {
         cout << "Choose operation to play the game:" << endl;
-        cout << "Options:\n(0)Exit-Game\n\nPlayer Operations:\n(1)drive (2)fly_direct (3)fly_charter (4)fly_shuttle (5)build (6)discover_cure (7)treat (8)take_card (9)remove_cards (10)role\n\nBoard Operations:\n(11)Print-Board (12)is_clean (13)remove_cures (14)remove_stations" << endl << endl;
+        cout << "Options:\n(0)Exit-Game\n\nPlayer Operations:\n(1)drive (2)fly_direct (3)fly_charter (4)fly_shuttle (5)build (6)discover_cure (7)treat (8)take_card (9)remove_cards (10)role" << endl << endl;
+        cout << "Board Operations:\n(11)Print-Board (12)is_clean (13)remove_cures (14)remove_stations" << endl << endl;
+        cout << "Special Operations:\n(15)current-city (16)connections-to-city" << endl << endl;
         int operation;
         cin >> operation;
-        City city;
+        City city = start_city;
         Color color;
         if(operation == 0) { exit(1); }
-        if(operation < 0 || operation > 11) {
-            cout << "Invalid operation - please try again" << endl;
+        if(operation < 0 || operation > 16) {
+            cout << "Invalid operation - please try again" << endl << endl;
         } else {
             switch (operation) {
                 case 1:
                     cout << "Choose city to drive:" << endl;
                     city = get_city();
                     player.drive(city);
-                    cout << "Player drive to " << get_city_name(city) << endl;
+                    cout << "Player drive to " << get_city_name(city) << endl << endl;
                     break;
                 case 2:
                     cout << "Choose city to fly:" << endl;
                     city = get_city();
                     player.fly_direct(city);
-                    cout << "Player fly to " << get_city_name(city) << endl;
+                    cout << "Player fly to " << get_city_name(city) << endl << endl;
                     break;
                 case 3:
                     cout << "Choose city to fly:" << endl;
                     city = get_city();
                     player.fly_charter(city);
-                    cout << "Player fly to " << get_city_name(city) << endl;
+                    cout << "Player fly to " << get_city_name(city) << endl << endl;
                     break;
                 case 4:
                     cout << "Choose city to fly:" << endl;
                     city = get_city();
                     player.fly_shuttle(city);
-                    cout << "Player fly to " << get_city_name(city) << endl;
+                    cout << "Player fly to " << get_city_name(city) << endl << endl;
                     break;
                 case 5:
                     player.build();
-                    cout << "Player build" << endl;
+                    cout << "Player build" << endl << endl;
                     break;
                 case 6:
                     cout << "Choose color:" << endl;
                     color = get_color();
                     player.discover_cure(color);
-                    cout << "Player discover cure" << endl;
+                    cout << "Player discover cure" << endl << endl;
                     break;
                 case 7:
                     cout << "Choose city to treat:" << endl;
                     city = get_city();
                     player.treat(city);
-                    cout << "Player treat " << get_city_name(city) << endl;
+                    cout << "Player treat " << get_city_name(city) << endl << endl;
                     break;
                 case 8:
                     cout << "Choose city to take card:" << endl;
                     city = get_city();
                     player.take_card(city);
-                    cout << "Player taken card " << get_city_name(city) << endl;
+                    cout << "Player taken card " << get_city_name(city) << endl << endl;
                     break;
                 case 9:
                     player.remove_cards();
-                    cout << "Player removed cards" << endl;
+                    cout << "Player removed cards" << endl << endl;
                     break;
                 case 10:
-                    cout << "Player role is: " << player.role() << endl;
+                    cout << "Player role is: " << player.role() << endl << endl;
                     break;
                 case 11:
-                    cout << board << endl;
+                    cout << board << endl << endl;
                     break;
                 case 12:
-                    cout << "Board is clean: " << board.is_clean() << endl;
+                    cout << "Board is clean: " << board.is_clean() << endl << endl;
                     break;
                 case 13:
                     board.remove_cures();
-                    cout << "Board removed cures" << endl;
+                    cout << "Board removed cures" << endl << endl;
                     break;
                 case 14:
                     board.remove_stations();
                     cout << "Board removed research stations" << endl;
                     break;
+                case 15:
+                    cout << "Current city: " << get_city_name(city_by_index(city)) << endl << endl;
+                    break;
+                case 16:
+                    set<City> connection = city_map.at(city);
+                    cout << "Connections: [";
+                    for(const auto& c : connection) {
+                        cout << get_city_name(city_by_index(c)) << ' ';
+                    }
+                    cout << ']' << endl << endl;
+                    break;
             }
         }
     }
 
-    return 0;
+    exit(1);
 }
