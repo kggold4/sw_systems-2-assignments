@@ -23,12 +23,12 @@ namespace pandemic {
             if(!has_card(city)) {
                 throw invalid_argument("player do not have given city card: " + get_city_name(city));
             }
+//            this->player_cards.erase(city);
             remove_card(city);
         }
         if(this->board[city] == 0) { throw invalid_argument("current city not have disease cubes"); }
         if(this->board.has_cure(get_city_color(city))) {
             this->board[city] = 0;
-            return *this;
         } else {
             this->board[city]--;
         }

@@ -38,6 +38,22 @@ namespace pandemic {
             // role type
             string role_type;
 
+            // return true if the player have the given city card
+            bool has_card(City city) {
+                if(cards_is_empty()) { throw invalid_argument("player do not have cards"); }
+                return this->player_cards.find(city) != this->player_cards.end();
+            }
+
+            // remove card from player cards
+            void remove_card(City city) { this->player_cards.erase(city); }
+
+            // check if city is valid
+            bool valid_city(const City city) const {
+                if(city < 0 || city >= MAX_CITIES) { return false; }
+                return true;
+            }
+
+            bool cards_is_empty() const { return this->player_cards.empty(); }
 
         public:
 
@@ -63,41 +79,5 @@ namespace pandemic {
             virtual Player& remove_cards();
 
             string role() const;
-
-            set<City> get_player_cards() const { return this->player_cards; };
-            void erase_card(City card) { this->player_cards.erase(card); }
-            City get_current_city() const { return this->current_city; }
-            void set_current_city(const City city) { this->current_city = city; };
-
-            // return true if the player have the given city card
-            bool has_card(City city) {
-                if(cards_is_empty()) { throw invalid_argument("player do not have cards"); }
-                return this->player_cards.find(city) != this->player_cards.end();
-            }
-
-            // remove card from player cards
-            void remove_card(City city) { this->player_cards.erase(city); }
-
-            // check if city is valid
-            bool valid_city(const City city) const {
-                if(city < 0 || city >= MAX_CITIES) { return false; }
-                return true;
-            }
-
-            bool cards_is_empty() const {
-                return this->player_cards.empty();
-            }
-
-            void remove_all_city_cubes() {
-                int number_of_city_cubes = this->board.get_city_cubes(this->current_city);
-                while(number_of_city_cubes > 0) {
-                    decrease_city_cubes();
-                    number_of_city_cubes--;
-                }
-            }
-
-            void decrease_city_cubes() {
-                this->board[this->current_city]--;
-            }
     };
 }

@@ -31,12 +31,14 @@ namespace pandemic {
         // have enough cards with given color
         // removing cards with given color
         int counter_remove_cards = 0;
-        for(auto &card : this->player_cards) {
-            remove_card(card);
+        set<City>::iterator it = this->player_cards.begin();
+        while(it != this->player_cards.end()) {
+            it = this->player_cards.erase(it);
             counter_remove_cards++;
             if (counter_remove_cards == MAX_REMOVE_CARDS_IN_DISCOVER_CURE) {
                 break;
             }
+            it++;
         }
         this->board.set_cure(color);
         return *this;

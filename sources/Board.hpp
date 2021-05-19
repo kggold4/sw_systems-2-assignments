@@ -24,9 +24,6 @@ namespace pandemic {
             // disease cube in each city
             map<City, int> cities_cubes;
 
-            // each city has name
-            map<int, string> cities_names;
-
             // each city can have a research station
             map<City, bool> research_stations;
 
@@ -57,7 +54,7 @@ namespace pandemic {
             int& operator[](City city);
 
             // output ostream
-            friend ostream& operator<<(ostream& ost, const Board& board);
+            friend ostream& operator<<(ostream& out, const Board& board);
 
             /**
              * cities methods

@@ -19,26 +19,18 @@ using namespace pandemic;
 
 namespace pandemic {
 
-    // number of cities
-    static const unsigned int MAX_CITIES = 48;
-    static const unsigned int MAX_COLORS = 4;
-
     // board constructor
     Board::Board() {
-        int i;
-        for(i = 0; i < MAX_CITIES; i++) {
 
+        for(int i = 0; i < MAX_CITIES; i++) {
             City city = city_by_index(i);
             this->cities_cubes[city] = 0;
-            string name_city = CITIES_NAMES[i];
-            this->cities_names[i] = name_city;
             this->research_stations.insert({city, false});
         }
-        for(i = 0; i < MAX_COLORS; i++) {
+        for(int i = 0; i < MAX_COLORS; i++) {
             Color color = color_by_index(i);
             this->cures.insert({color, false});
         }
-
     }
 
     Board::~Board() {}
@@ -76,10 +68,15 @@ namespace pandemic {
         return this->cities_cubes[city];
     }
 
-    ostream& operator<<(ostream& ost, const Board& board) {
-        for(int i = 0; i < MAX_CITIES; i++) {
-            //ost << i << " [" << get_city_name(city_by_index(i)) << "]: " << board[(city_by_index(i))] << endl;
-        }
-        return ost;
+    ostream& operator<<(ostream& out, const Board& board) {
+
+        out << "output";
+
+//        map<City, Color>::iterator it = CITIES_MAP.begin();
+//        while(it != CITIES_MAP.end()) {
+//            out << "City: " << it->first << ", Color: " << it->second << ", Number of Disease Cubes: " << board.cities_cubes.at(*it);
+//            it++;
+//        }
+        return out;
     }
 }
