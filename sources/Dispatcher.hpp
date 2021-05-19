@@ -21,5 +21,6 @@ namespace pandemic {
         public:
             Dispatcher(Board& board, const City city);
             Player& fly_direct(const City city) override;
+            //Dispatcher& operator=(const Player& player) { return *this; }
     };
 }

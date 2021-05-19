@@ -72,6 +72,10 @@ namespace pandemic {
 
         out << "output";
 
+        for(const auto c: CITIES_MAP) {
+            cout << "City: " << get_city_name(c.first) << ", Color: " << get_color_name(c.second) << ",,," << endl;
+        }
+
 //        map<City, Color> temp_city_map(CITIES_MAP);
 //        map<City, Color>::iterator it = temp_city_map.begin();
 //        while(it != CITIES_MAP.end()) {

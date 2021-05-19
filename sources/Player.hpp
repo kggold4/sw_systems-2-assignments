@@ -78,6 +78,16 @@ namespace pandemic {
             virtual Player& treat(const City city);
             virtual Player& remove_cards();
 
+            Player& operator=(const Player& player) { return *this; }
+
+//            Player& operator=(Player& player) {
+//                this->board = player.board;
+//                this->current_city = player.current_city;
+//                this->player_cards = player.player_cards;
+//                this->role_type = player.role_type;
+//                return *this;
+//            }
+
             string role() const;
     };
 }
