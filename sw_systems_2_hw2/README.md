@@ -1,6 +1,4 @@
-# Systems praogramming with C++ - Assignments 2
-
-### <i> By Kfir Goldfarb </i>
+# Assignments 2
 
 This assignment is to implement a 2D messegeboard class called Board
 
